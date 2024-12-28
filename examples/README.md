@@ -1,4 +1,117 @@
+# Enhancements and Optimizations for `clip_norm.py`
 
+## Introduction
+
+This document describes the enhancements and optimizations implemented in the `clip_norm.py` file for improving gradient clipping efficiency in distributed and large-scale federated learning setups. The updated features ensure improved scalability, performance, and usability.
+
+## Key Enhancements
+
+### 1. Distributed Gradient Clipping
+- **Description**: Introduced distributed gradient clipping to handle large-scale federated learning scenarios efficiently.
+- **Benefit**: Reduces communication overhead and enhances performance when training on multiple nodes.
+
+### 2. Dynamic Gradient Clipping Thresholds
+- **Description**: Added support for dynamic adjustment of gradient clipping thresholds based on training performance metrics.
+- **Benefit**: Prevents over-clipping, ensuring better model convergence and performance.
+
+### 3. Enhanced Logging and Monitoring
+- **Description**: Integrated detailed logging to track gradient norms, clipping coefficients, and threshold adjustments.
+- **Benefit**: Provides real-time insights into the gradient clipping process for debugging and monitoring.
+
+### 4. Robust Error Handling
+- **Description**: Implemented robust handling for non-finite gradient norms (e.g., NaN, Inf) with user-configurable error handling.
+- **Benefit**: Ensures stable training in the presence of numerical instabilities.
+
+### 5. Centralized and Distributed Support
+- **Description**: Updated the code to handle both centralized single-node and distributed multi-node scenarios.
+- **Benefit**: Provides flexibility for users to deploy the algorithm in various setups.
+
+### 6. Refactored Code
+- **Description**: Improved readability and maintainability with clear type annotations, detailed comments, and structured functions.
+- **Benefit**: Simplifies future modifications and enhances code quality.
+
+## Example Usage
+
+Below is an example demonstrating the usage of the updated `clip_grad_norm_` function with dynamic threshold adjustment:
+
+```python
+from clip_norm import clip_grad_norm_
+
+# Example usage for dynamic gradient clipping
+parameters = model.parameters()
+dynamic_threshold = calculate_dynamic_threshold(metrics)
+clip_grad_norm_(
+    parameters,
+    max_norm=dynamic_threshold,
+    norm_type=2.0,
+    error_if_nonfinite=True
+)
+
+# Enhancements and Optimizations for `customized_client.py`
+
+## Key Features Added
+
+### 1. Client Resource Monitoring
+- **Description**: Tracks CPU, memory, and GPU utilization during training.
+- **Benefit**: Ensures the training process adapts to client resource constraints.
+
+### 2. Dynamic Differential Privacy Adjustment
+- **Description**: Adjusts the differential privacy noise level dynamically based on resource usage.
+- **Benefit**: Balances privacy and performance in resource-constrained environments.
+
+### 3. Adaptive Task Allocation
+- **Description**: Modifies batch size and local steps dynamically based on available resources.
+- **Benefit**: Ensures efficient resource utilization and avoids overloading the client.
+
+### 4. Enhanced Logging
+- **Description**: Logs resource usage, batch size adjustments, and training progress in detail.
+- **Benefit**: Provides visibility into the training process for debugging and monitoring.
+
+## Usage Example
+
+```python
+# Example usage of the enhanced Customized_Client
+client = Customized_Client()
+client_data = load_client_data()
+model = load_model()
+conf = load_config()
+
+results = client.train(client_data, model, conf)
+print("Training Results:", results)
+
+## Customized Executor Enhancements
+
+### Features Added
+1. **Asynchronous Task Execution**:
+   - Introduced `ThreadPoolExecutor` to enable concurrent task execution.
+   - Tasks are now executed in parallel, significantly improving task throughput and resource utilization.
+
+2. **Execution Logging**:
+   - Logs detailed information for each task, including:
+     - Start and end times
+     - Execution duration
+     - Errors encountered
+   - Logs are saved in `executor_task_log.txt` for performance monitoring and debugging.
+
+3. **Differential Privacy Logging**:
+   - Added detailed logs for differential privacy computations, including:
+     - Privacy budget per task
+     - Noise distribution used
+   - Logs provide transparency for privacy configurations and enable diagnostic analysis.
+
+4. **Dynamic Task Scheduling and Resource Optimization**:
+   - Dynamically calculates differential privacy budgets based on task priority.
+   - Assigns noise distributions (e.g., Gaussian, Laplace) dynamically to enhance privacy protection.
+   - Tasks with lower priorities are assigned higher noise for better privacy protection.
+
+5. **Performance Bottleneck Analysis**:
+   - Logs task execution times to help identify and analyze performance bottlenecks.
+   - Enables informed decisions for further optimization.
+
+---
+
+### Example Log Output
+The executor generates the following log details during execution:
 
 # Building Your Own FL Algorithm with FedScale
 
