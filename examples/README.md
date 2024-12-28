@@ -1,3 +1,112 @@
+## Customized Client Enhancements
+
+### Features Added
+
+1. **Resource-Tiered Training Strategy**:
+   - **Dynamic Batch Size Adjustment**:
+     - Dynamically adjusts batch size based on client's system resource utilization (e.g., CPU and memory usage).
+     - Prevents overloading of resource-constrained devices while maximizing utilization of high-performance devices.
+   - **Adaptive Local Steps**:
+     - Adjusts the number of local steps dynamically based on device performance metrics.
+     - Reduces training bottlenecks caused by underpowered devices.
+
+2. **Fault Prediction and Recovery**:
+   - **System Resource Monitoring**:
+     - Implements real-time monitoring of CPU and memory usage during training.
+     - Predicts potential system crashes by analyzing resource usage trends.
+   - **Model Snapshot Mechanism**:
+     - Periodically saves model snapshots (e.g., every 10 training steps).
+     - Enables rapid recovery of training progress in case of unexpected interruptions.
+
+3. **Distributed Resource Optimization Collaboration**:
+   - **Shared Resource States**:
+     - Devices collaboratively share resource utilization data during distributed training.
+     - Dynamically redistributes tasks across clients to minimize overall training time.
+   - **Collaborative Task Allocation**:
+     - Optimizes task allocations based on real-time resource availability and model performance metrics.
+     - Improves efficiency in multi-client training setups.
+
+4. **Additional Enhancements**:
+   - **Error Logging**:
+     - Logs detailed runtime errors and issues encountered during training.
+     - Provides insights for debugging and performance monitoring.
+   - **Refactored Code for Modularity**:
+     - Improved modular structure for better integration with other federated learning frameworks.
+     - Added detailed function documentation for better maintainability and readability.
+
+---
+
+### Example Usage
+
+```python
+from customized_client import Customized_Client
+
+# Simulate configuration
+conf = load_config()
+client_data = load_client_data()
+model = load_model()
+
+# Monitor and adjust based on system resources
+resources = monitor_system_resources()
+conf.batch_size = adjust_batch_size(conf, resources)
+conf.local_steps = adjust_local_steps(conf, resources)
+
+# Train the client
+client = Customized_Client()
+results = client.train(client_data, model, conf)
+print("Training Results:", results)
+
+## Customized Executor Enhancements
+
+### Features Added
+
+1. **Task Priority Queue**:
+   - Implements a dynamic priority queue for tasks.
+   - Higher priority tasks are executed first, ensuring critical tasks are handled promptly.
+   - Supports dynamic priority adjustment during runtime.
+
+2. **Asynchronous Task Execution**:
+   - Introduced `asyncio` and `ThreadPoolExecutor` to enable asynchronous and concurrent task execution.
+   - Improves system throughput and responsiveness, especially in large-scale federated learning environments.
+
+3. **Performance Monitoring and Analysis**:
+   - **Real-Time Monitoring**:
+     - Logs CPU usage and memory utilization during execution.
+     - Helps identify potential performance bottlenecks.
+   - **Detailed Task Logging**:
+     - Logs task start and end times, execution duration, and resource consumption.
+     - Provides detailed insights into system performance and task execution efficiency.
+
+4. **Fault Recovery Mechanism**:
+   - Automatically detects task failures and retries based on predefined rules.
+   - Logs detailed error information to aid debugging and analysis.
+
+5. **RESTful API for Monitoring**:
+   - Simulates a RESTful API for developers to query real-time task progress and resource utilization.
+   - Provides endpoints for task status, system health, and historical performance metrics.
+
+---
+
+### Example Usage
+
+```python
+from customized_executor import Customized_Executor
+import asyncio
+
+# Initialize executor
+executor = Customized_Executor(args)
+
+# Submit tasks with priorities
+asyncio.run(executor.submit_task(1, executor.example_task, "Critical Task"))
+asyncio.run(executor.submit_task(2, executor.example_task, "Secondary Task"))
+
+# Execute all tasks
+asyncio.run(executor.execute_tasks())
+
+# Monitor performance (real-time logs will display resource utilization)
+executor.monitor_performance()
+
+
 # Enhancements and Optimizations for `clip_norm.py`
 
 ## Introduction
